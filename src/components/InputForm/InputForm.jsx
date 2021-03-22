@@ -1,20 +1,24 @@
 import React from 'react';
+import { setStorage } from '../../utils/storage';
+import { checkInputForm } from '../../utils/checkInputForm';
+import './InputForm.scss';
 
-function InputForm({ setInputState, InputState }) {
-  const [input, setInput] = React.useState({});
+function InputForm({ setTableState, tableState }) {
+  const [input, setInput] = React.useState({ name: '', quality: '', cost: '' });
 
   const changeValue = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
-    console.log(input);
   };
 
   const inputHandler = () => {
-    const { quality, name, cost } = input;
-    setInputState([
-      ...InputState,
-      { name: name, quality: quality, cost: cost, generalCost: quality * cost },
-    ]);
+    const { isValid } = checkInputForm(input);
+    if (isValid) {
+      const { quality, cost } = input;
+      const toUpdateProducts = [...tableState, { ...input, generalCost: quality * cost }];
+      setTableState(toUpdateProducts);
+      setStorage('productsList', toUpdateProducts);
+    }
   };
 
   return (
@@ -29,7 +33,7 @@ function InputForm({ setInputState, InputState }) {
       <input
         className="table__input-form_quantity"
         type="number"
-        placeholder="Quantity"
+        placeholder="Quality"
         name="quality"
         onChange={changeValue}
       />

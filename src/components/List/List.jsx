@@ -3,11 +3,10 @@ import './List.scss';
 
 import ListCell from '../ListCell/ListCell';
 
-function List({ InputState, setInputState }) {
-
+function List({ tableState, setTableState }) {
   function sum(field) {
     let currSum = 0;
-    InputState.forEach((el) => {
+    tableState.forEach((el) => {
       currSum += Number(el[field]);
     });
 
@@ -26,15 +25,15 @@ function List({ InputState, setInputState }) {
         </tr>
       </thead>
       <tbody>
-        <ListCell InputState={InputState} setInputState={setInputState} />
+        <ListCell tableState={tableState} setTableState={setTableState} />
       </tbody>
       <tfoot>
         <tr>
           <td>Total:</td>
-          {InputState && <td>{InputState.length}</td>}
-          {InputState && <td>{sum('quality')}</td>}
-          {InputState && <td>{sum('cost')}</td>}
-          {/* {InputState && <td>{sum('generalCost')}</td>} */}
+          {tableState && <td>{tableState.length}</td>}
+          {tableState && <td>{sum('quality')}</td>}
+          {tableState && <td>{sum('cost')}</td>}
+          <td></td>
         </tr>
       </tfoot>
     </table>

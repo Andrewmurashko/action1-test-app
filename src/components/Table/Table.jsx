@@ -3,19 +3,15 @@ import './Table.scss';
 
 import InputForm from '../InputForm/InputForm';
 import List from '../List/List';
+import { getStorage } from '../../utils/storage';
 
 function Table() {
-    const [InputState, setInputState] = React.useState([])
-    React.useEffect(() => {
-        console.log(InputState)
-        }
-    , [InputState])
+  const [tableState, setTableState] = React.useState(getStorage('productsList') || []);
 
-    
   return (
-    <div className="table">
-      <InputForm setInputState={setInputState} InputState={InputState} />
-      <List InputState={InputState} setInputState={setInputState}/>
+    <div className="wrapper table">
+      <InputForm setTableState={setTableState} tableState={tableState} />
+      <List tableState={tableState} setTableState={setTableState} />
     </div>
   );
 }

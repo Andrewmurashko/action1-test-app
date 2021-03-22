@@ -1,3 +1,84 @@
-// .table__list_cell {
-//  display: flex;
-// }
+@import '../../sass/abstract/constants';
+
+th {
+  padding: 10px 20px;
+  background: #56433d;
+  color: #f9c941;
+  border-right: 2px solid;
+  font-size: 0.9em;
+}
+
+th:first-child {
+  //   text-align: left;
+}
+
+th:last-child {
+  border-right: none;
+}
+
+td {
+  vertical-align: middle;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  border-top: 2px solid #56433d;
+  border-bottom: 2px solid #56433d;
+  border-right: 2px solid #56433d;
+}
+
+td:first-child {
+  border-left: 2px solid #56433d;
+  //   border-right: none;
+}
+
+td:nth-child(2) {
+  //   text-align: left;
+}
+
+td:last-child {
+  border: 0px;
+}
+
+input {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  resize: vertical;
+  padding: 10px;
+  border-radius: 2px;
+  border: 0;
+  color: black;
+  background-image: $background-image-light;
+  background-repeat: no-repeat;
+  background-size: $background-size-table;
+  background-position: $background-position-table;
+  box-shadow: $box-shadow-table;
+  outline: none;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  color: #777674;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: rgba(255, 255, 255, 0.5) 1px 1px, rgba(100, 100, 100, 0.3) 3px 7px 3px;
+  user-select: none;
+  padding: 1em 2em;
+  outline: none;
+  border-radius: 3px / 100%;
+  background-image: $background-image-light;
+  background-repeat: no-repeat;
+  background-size: $background-size-table;
+  background-position: $background-position-table;
+  box-shadow: $box-shadow-table;
+
+  &:hover {
+    cursor: pointer;
+    transition: 0.5s linear;
+    background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+  }
+  
+  &:active {
+    top: 1px;
+  }
+}

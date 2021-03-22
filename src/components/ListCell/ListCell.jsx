@@ -1,26 +1,22 @@
 import React from 'react';
 import './ListCell.scss';
+import { setStorage } from '../../utils/storage';
 
-function ListCell({ InputState, setInputState }) {
+function ListCell({ tableState, setTableState }) {
 
   const deleteHandler = (index) => {
-    setInputState(InputState.filter((el,i)=> i !== index))
-    console.log(index)
-    console.log(InputState)
-  };
-  const changeValue = (e, index) => {
-    const { name, value } = e.target;
-    const newValue = InputState.map((el, i) => {
-      if (i === index) {
-        return { ...el, [name]: value, generalCost: el.quality * el.cost };
-      } else {
-        return el;
-      }
-    });
-    setInputState(newValue);
+    const toUpdateProducts = tableState.filter((el, i) => i !== index);
+    setTableState(toUpdateProducts);
+    setStorage('productsList', toUpdateProducts);
   };
 
-  return InputState.map((el, index) => (
+  const changeValue = (e, index) => {
+    const { name, value } = e.target;
+    const newValue = tableState.map((el, i) => (i === index ? { ...el, [name]: value } : el));
+    setTableState(newValue);
+  };
+
+  return tableState.map((el, index) => (
     <>
       <tr className="table__list_cell" key={index}>
         <td>{index + 1}</td>
@@ -49,7 +45,7 @@ function ListCell({ InputState, setInputState }) {
           />
         </td>
         <td>{el.quality * el.cost}</td>
-        <button onClick={() => deleteHandler(index)}>Delete</button>
+        <td><button onClick={() => deleteHandler(index)}>Delete</button></td>
       </tr>
     </>
   ));

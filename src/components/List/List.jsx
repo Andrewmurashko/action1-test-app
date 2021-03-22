@@ -5,13 +5,12 @@ import ListCell from '../ListCell/ListCell';
 
 function List({ InputState, setInputState }) {
 
-  function sum(val) {
+  function sum(field) {
     let currSum = 0;
+    InputState.forEach((el) => {
+      currSum += Number(el[field]);
+    });
 
-      InputState.forEach((el) => {
-          console.log(val)
-          currSum += Number(el[val])});
- 
     return `${currSum}`;
   }
 
@@ -31,11 +30,11 @@ function List({ InputState, setInputState }) {
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          {InputState.length && <td>Positions:{InputState.length}</td>}
-          {InputState.length && <td>{sum('quality')}</td>}
-          {InputState.length && <td>{sum('cost')}</td>}
-          {InputState.length && <td>{sum('generalCost')}</td>}
+          <td>Total:</td>
+          {InputState && <td>{InputState.length}</td>}
+          {InputState && <td>{sum('quality')}</td>}
+          {InputState && <td>{sum('cost')}</td>}
+          {/* {InputState && <td>{sum('generalCost')}</td>} */}
         </tr>
       </tfoot>
     </table>

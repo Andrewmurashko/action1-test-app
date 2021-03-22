@@ -2,18 +2,17 @@ import React from 'react';
 import './ListCell.scss';
 
 function ListCell({ InputState, setInputState }) {
-  const [del, setDel] = React.useState(null);
 
   const deleteHandler = (index) => {
-    setDel(InputState.splice(() => index, 1));
+    setInputState(InputState.filter((el,i)=> i !== index))
+    console.log(index)
     console.log(InputState)
-    console.log(InputState.length)
   };
   const changeValue = (e, index) => {
     const { name, value } = e.target;
     const newValue = InputState.map((el, i) => {
       if (i === index) {
-        return { ...el, quality: value };
+        return { ...el, [name]: value, generalCost: el.quality * el.cost };
       } else {
         return el;
       }
@@ -25,7 +24,14 @@ function ListCell({ InputState, setInputState }) {
     <>
       <tr className="table__list_cell" key={index}>
         <td>{index + 1}</td>
-        <td>{el.name}</td>
+        <td>
+          <input
+            type="string"
+            value={el.name}
+            name="name"
+            onChange={(e) => changeValue(e, index)}
+          />
+        </td>
         <td>
           <input
             type="number"
@@ -34,8 +40,15 @@ function ListCell({ InputState, setInputState }) {
             onChange={(e) => changeValue(e, index)}
           />
         </td>
-        <td>{el.cost}</td>
-        <td>{el.generalCost}</td>
+        <td>
+          <input
+            type="number"
+            value={el.cost}
+            name="cost"
+            onChange={(e) => changeValue(e, index)}
+          />
+        </td>
+        <td>{el.quality * el.cost}</td>
         <button onClick={() => deleteHandler(index)}>Delete</button>
       </tr>
     </>

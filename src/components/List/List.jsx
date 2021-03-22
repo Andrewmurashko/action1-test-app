@@ -4,17 +4,14 @@ import './List.scss';
 import ListCell from '../ListCell/ListCell';
 
 function List({ InputState, setInputState }) {
+
   function sum(val) {
     let currSum = 0;
-    if (val === InputState[0].quality) {
-      InputState.forEach((el) => (currSum += Number(el.quality)));
-    }
-    if (val === InputState[0].cost) {
-      InputState.forEach((el) => (currSum += Number(el.cost)));
-    }
-    if (val === InputState[0].generalCost) {
-        InputState.forEach((el) => (currSum += Number(el.generalCost)));
-      }
+
+      InputState.forEach((el) => {
+          console.log(val)
+          currSum += Number(el[val])});
+ 
     return `${currSum}`;
   }
 
@@ -36,9 +33,9 @@ function List({ InputState, setInputState }) {
         <tr>
           <td></td>
           {InputState.length && <td>Positions:{InputState.length}</td>}
-          {InputState.length && <td>{sum(InputState[0].quality)}</td>}
-          {InputState.length && <td>{sum(InputState[0].cost)}</td>}
-          {InputState.length && <td>{sum(InputState[0].generalCost)}</td>}
+          {InputState.length && <td>{sum('quality')}</td>}
+          {InputState.length && <td>{sum('cost')}</td>}
+          {InputState.length && <td>{sum('generalCost')}</td>}
         </tr>
       </tfoot>
     </table>

@@ -6,11 +6,19 @@ function ListCell({ InputState, setInputState }) {
 
   const deleteHandler = (index) => {
     setDel(InputState.splice(() => index, 1));
+    console.log(InputState)
+    console.log(InputState.length)
   };
   const changeValue = (e, index) => {
     const { name, value } = e.target;
-    console.log(e.target, index, InputState[index].quality);
-    // setInputState({ ...InputState, InputState[index].quality: value});
+    const newValue = InputState.map((el, i) => {
+      if (i === index) {
+        return { ...el, quality: value };
+      } else {
+        return el;
+      }
+    });
+    setInputState(newValue);
   };
 
   return InputState.map((el, index) => (
